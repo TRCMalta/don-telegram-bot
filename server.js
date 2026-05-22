@@ -2201,6 +2201,7 @@ app.post("/webhook", async (req, res) => {
     // Voice
     if (msg.voice) {
       try {
+        await sendTyping(chatId); // show activity during transcription
         const transcript = await transcribeTelegramVoice(msg.voice.file_id);
         if (!transcript || transcript.length < 2) {
           await sendTelegram(chatId, "I received your voice message but could not make out the words. Could you try again or type your message?");
