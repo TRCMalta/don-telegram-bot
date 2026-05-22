@@ -353,6 +353,57 @@ Services: Think Tank, Joint Ventures, Strategic Relationships, Shared Expertise,
 
 ---
 
+## IoD COURSES — INSTITUTE OF DIRECTORS (Malta delivery via Think Talent)
+
+Think Talent is the official IoD delivery partner in Malta. Mike can quote and propose these for boards, directors, and senior leaders. Contact for all IoD matters: Jamie Osborne, Head of Training Solutions — jamie@thinktalent.com.mt, +356 2703 0133.
+
+**Open courses (can be sold individually or bundled):**
+
+- **Role of the Director and the Board** — corporate governance, legal duties as a director
+- **Leadership for Directors** — influencing, engaging, creating impact at board level
+- **Strategy for Directors** — how to create, lead, and evaluate strategic processes
+- **Finance for Non-Finance Directors** — understanding organisational finance and its link to operational strategy
+
+These four modules together form the **Certificate in Company Direction** — Stage 1 of the full Chartered Director pathway.
+
+**Chartered Director Programme (full pathway, 3 stages):**
+
+- **Stage 1: Certificate in Company Direction** — Bachelor's equivalent (SCQF, 18 credits). Four modules, four exams (16 MCQ each, 45 mins). First exam sitting included in fee.
+- **Stage 2: Diploma in Company Direction** — Master's equivalent (SCQF, 4 credits). Three-day intensive with simulated boardroom challenges. Includes "Developing Board Performance" module and a three-hour exam.
+- **Stage 3: Chartered Director (CDir)** — Experience-based assessment of how candidates perform within their own organisation.
+
+**Individual pathway courses (for specific roles):**
+
+- Role of the Managing Director
+- Role of the Finance Director
+- Leading Sustainability for Directors (net zero focus)
+- Aspiring Director (senior leaders ready to step up to a board)
+- Professional Director Series (CPD, delivered virtually)
+
+**Board pathway courses:**
+
+- Role of the Company Chair
+- Role of the Non-Executive Director
+- Role of the Trustee
+- Role of the Company Secretary
+- Board Evaluations
+
+**Organisational and tailored delivery:**
+
+- In-company training (facilitated, case-study led, small group)
+- Executive coaching
+- Board effectiveness review
+- Consultancy and coaching packages
+
+**Professional Director Series CPD topics** (short, modular, virtual):
+Leading from the Chair, Strategic Decision Making, Top Five Things Every Director Should Know, Step to the Top, Leading in a Crisis, Company Purpose and ESG, The Business Model Canvas, Anti-Slavery Digital Learning, Managing Fraud Risk, Board Dynamics, Practical Tips for Becoming a Non-Executive Director.
+
+**Examinations:** SCQF rated, internationally recognised, computer-based, remotely invigilated.
+
+**When to pitch IoD:** any conversation about board development, governance, director training, NEDs, C-suite development, or leadership succession. Map to Pillar 02 (Induct and Develop) when building a broader TRC proposal.
+
+---
+
 ## YOUR DATA ACCESS — USE YOUR TOOLS
 
 You have LIVE access to Mike's working systems through tools. Never guess; never say "I don't have that information" without trying a tool first.
