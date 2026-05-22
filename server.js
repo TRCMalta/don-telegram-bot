@@ -1018,9 +1018,128 @@ Use these when Mike is in a competitive sales situation, prepping a pitch, or as
 
 ---
 
+## MALTA EMPLOYMENT LAW — KEY FACTS
+
+Source: Employment and Industrial Relations Act (EIRA), Cap. 452 (Malta). Enforced by DIER (Directorate for Employment and Industrial Relations).
+
+**Working hours:** 48-hour max per week (averaged over 17 weeks). Standard is 40 hours. Employees can opt out in writing.
+
+**Annual leave:** 192 hours/year (24 days equivalent). Public holidays on top (14 days, some compensated if they fall on weekend).
+
+**Sick leave:** 2 weeks paid sick leave per year (statutory minimum). Employer may require medical certificate from day 1.
+
+**Probation periods:**
+- Standard roles: 6 months maximum
+- Managerial/technical/highly-skilled: up to 12 months
+- Fixed-term contracts under 6 months: probation may not exceed half the contract length
+
+**Notice periods (by length of service):**
+- Under 1 month: 1 week
+- 1 month to 6 months: 2 weeks
+- 6 months to 2 years: 4 weeks
+- 2 years to 4 years: 8 weeks
+- 4 years to 7 years: 10 weeks
+- 7+ years: 12 weeks
+- Either party can pay in lieu of notice
+
+**Overtime:** Minimum 1.5× normal hourly rate. Must be agreed in writing.
+
+**Minimum wage (2026):** €229.44/week for employees aged 18+. Lower rate for under-18s.
+
+**Maternity leave:** 18 weeks — 14 weeks fully paid (employer-funded top-up via social security), 4 weeks optional unpaid. Cannot be dismissed during pregnancy or maternity leave.
+
+**Paternity leave:** 10 working days paid (statutory minimum). Some employers offer more.
+
+**Parental leave:** 4 months per parent per child, up to age 8. Unpaid unless employer policy says otherwise. Non-transferable (each parent must use their own).
+
+**Redundancy:** No statutory redundancy pay in Malta (unlike UK). However, notice periods and any contractual severance apply. DIER must be notified for collective redundancies (20+ employees).
+
+**Fixed-term contracts:** Maximum 4 years total (including renewals). After that, employee is deemed permanent.
+
+**Anti-discrimination:** Protected characteristics: age, gender, sexual orientation, religion, race/ethnicity, disability, family status, marital status. Employer must make reasonable adjustments for disability.
+
+**Industrial Tribunal:** Employment dispute resolution body. Cases must typically be filed within 4 months of the incident. Awards can include reinstatement or compensation (up to 12 months' pay for unfair dismissal).
+
+**Key difference from UK:** No statutory redundancy pay. Notice periods are shorter. Employment law is generally less litigated than UK.
+
+---
+
+## EU GDPR — AS APPLIED IN MALTA
+
+Regulation (EU) 2016/679, in force since May 2018. Malta supervisory authority: **IDPC** (Information and Data Protection Commissioner), idpc.org.mt.
+
+**7 Core Principles (Article 5):**
+1. Lawfulness, fairness, transparency
+2. Purpose limitation — collect for specified, explicit, legitimate purpose only
+3. Data minimisation — only what's necessary
+4. Accuracy — keep data up to date
+5. Storage limitation — don't keep longer than needed
+6. Integrity and confidentiality — appropriate security
+7. Accountability — controller must demonstrate compliance
+
+**6 Lawful Bases for Processing (Article 6):**
+1. Consent — freely given, specific, informed, unambiguous; can be withdrawn at any time
+2. Contract — necessary to perform a contract with the data subject
+3. Legal obligation — required by law
+4. Vital interests — life-or-death situation
+5. Public task — carrying out an official function
+6. Legitimate interests — controller's interests, balanced against data subject rights (most flexible, most challenged)
+
+**8 Individual Rights:**
+1. Right to be informed (privacy notice)
+2. Right of access (Subject Access Request — respond within 1 month)
+3. Right to rectification
+4. Right to erasure ("right to be forgotten")
+5. Right to restrict processing
+6. Right to data portability
+7. Right to object (including to direct marketing — must always honour)
+8. Rights related to automated decision-making/profiling
+
+**Special Category Data (Article 9):** Requires explicit consent or another specific legal ground. Includes: health data, biometric data, racial/ethnic origin, political opinions, religious beliefs, trade union membership, genetic data, sex life/sexual orientation.
+
+**Data Protection Officer (DPO):**
+- Mandatory if: (a) public authority, (b) large-scale systematic monitoring of individuals, or (c) large-scale processing of special category data
+- For TRC/Think Talent: assess case by case. If processing large volumes of health/HR data for clients, a DPO may be required.
+
+**Breach Notification:**
+- Must notify IDPC within 72 hours of becoming aware of a breach (if risk to individuals)
+- Must notify affected individuals "without undue delay" if high risk
+- Keep a record of ALL breaches, even low-risk ones
+
+**Employee Data (HR context):**
+- Employees are data subjects. Cannot be forced to consent to non-essential processing as a condition of employment.
+- Can rely on contract or legitimate interests for payroll, performance management, health & safety
+- Monitoring employees (email, CCTV, GPS) requires a lawful basis and employees must be informed
+- Retention periods for HR records: typically 5–7 years post-employment for payroll/tax records
+
+**Cross-border transfers:**
+- Data leaving EU/EEA requires: adequacy decision (UK currently has one, US has Privacy Framework), Standard Contractual Clauses (SCCs), or Binding Corporate Rules
+- Check before sending personal data to non-EU processors/tools
+
+**Data Processing Agreements (DPAs):** Required with every third-party processor (e.g. CRM vendors, payroll providers, cloud storage). Must specify: purpose, duration, nature of processing, data types, obligations.
+
+**Key compliance documents every business needs:**
+- Record of Processing Activities (ROPA) — mandatory if 250+ employees or high-risk processing
+- Privacy Notices (website + employees + candidates)
+- Data Retention Policy
+- Data Breach Response Procedure
+- DPA with each processor
+
+**Fine tiers (Article 83):**
+- Lower tier (83.4): up to €10M or 2% of global turnover — for administrative failures (ROPA, DPO appointment, breach notification)
+- Upper tier (83.5): up to €20M or 4% of global turnover — for core principles violations, individual rights, unlawful processing
+
+**Practical note for TRC:** As an HR/L&D consultancy, TRC processes candidate CVs, client HR data, and course registrations. Likely lawful bases: contract (candidates in recruitment), legitimate interests (marketing to existing contacts), legal obligation (payroll/tax). Ensure all vendors (Odoo, Railway, email tools) have signed DPAs.
+
+---
+
 ## YOUR DATA ACCESS — USE YOUR TOOLS
 
 You have LIVE access to Mike's working systems through tools. Never guess; never say "I don't have that information" without trying a tool first.
+
+**Web research (use freely):**
+- web_search — search the web for news, company info, regulations, prices, research. Use whenever Mike asks you to look something up or research a topic.
+- fetch_webpage — read the full content of any public URL. Combine with web_search to go deep on a topic.
 
 **Microsoft 365 (Mike's mailbox & calendar):**
 - check_mike_email — read recent / search / unread filter
@@ -1295,6 +1414,29 @@ const DON_TOOLS = [
         isOnlineMeeting: { type: "boolean", description: "Create a Teams meeting link" },
       },
       required: ["subject", "start", "end"],
+    },
+  },
+  {
+    name: "web_search",
+    description: "Search the web for current information on any topic. Use for research, news, company info, laws, regulations, prices, or anything Mike asks to look up. Returns top results with titles, URLs, and snippets.",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "Search query" },
+        count: { type: "number", description: "Number of results (default 5, max 10)" },
+      },
+      required: ["query"],
+    },
+  },
+  {
+    name: "fetch_webpage",
+    description: "Fetch and read the full text content of any public webpage or URL. Use to read an article, document, company website, news piece, or regulation in full after finding it via web_search.",
+    input_schema: {
+      type: "object",
+      properties: {
+        url: { type: "string", description: "Full URL to fetch" },
+      },
+      required: ["url"],
     },
   },
 ];
@@ -1968,6 +2110,39 @@ async function handleToolCall(name, input) {
           return `Calendar event created: ${JSON.stringify(subject)} on ${startFormatted}.${attendeeList}`;
         }
         return `Failed to create event: ${JSON.stringify(result).substring(0, 500)}`;
+      }
+
+      case "web_search": {
+        const BRAVE_KEY = process.env.BRAVE_API_KEY;
+        if (!BRAVE_KEY) return "BRAVE_API_KEY not configured.";
+        const count = Math.min(input.count || 5, 10);
+        const searchUrl = `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(input.query)}&count=${count}`;
+        const data = await fetchJSON(searchUrl, {
+          headers: { "Accept": "application/json", "X-Subscription-Token": BRAVE_KEY },
+        });
+        if (!data.web?.results?.length) return `No results found for: ${input.query}`;
+        let result = `Search results for "${input.query}":\n\n`;
+        data.web.results.forEach((r, i) => {
+          result += `${i + 1}. **${r.title}**\n${r.url}\n${r.description || ""}\n\n`;
+        });
+        return result;
+      }
+
+      case "fetch_webpage": {
+        const res = await fetch(input.url, {
+          headers: { "User-Agent": "Mozilla/5.0 (compatible; Don-Bot/1.0)" },
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!res.ok) return `Failed to fetch ${input.url}: ${res.status}`;
+        const html = await res.text();
+        const text = html
+          .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+          .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .substring(0, 8000);
+        return `Content from ${input.url}:\n\n${text}`;
       }
 
       default:
