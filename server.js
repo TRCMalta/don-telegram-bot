@@ -559,8 +559,8 @@ Use these when Mike is in a competitive sales situation, prepping a pitch, or as
 
 ---
 
-### BATTLECARD 2 — Malta Business School (MBS)
-**Website:** mbs.edu.mt
+### BATTLECARD 2 — Malta Business School (MBS) / Allied Consultants Malta
+**Website:** mbs.edu.mt | **Parent company:** Allied Consultants Malta (alliedconsultants.com.mt) — a long-established Malta management consulting firm with ESOMAR membership. MBS is the training and education arm of Allied Consultants; they share leadership and infrastructure.
 **What they are:** Licensed higher education institution. ATHE-accredited qualifications at MQF 5-7. Key programmes: Henley Executive MBA (MQF 7), Bachelor in Business and Management (MQF 6), Diploma in Strategic Management (ATHE Level 7), Certificate in Project Management (ATHE Level 6), Certificate in Coaching (ATHE Level 6). Evening classes, live-streamed and in-person.
 **Their strengths:** Strong academic credibility at MQF 6-7 — Henley MBA is a genuine differentiator for senior leaders wanting a world-class qualification. Evening class model suits working professionals. Good funding support. ATHE accreditation is internationally respected.
 **Their weaknesses:** Academic, not corporate. Programmes are structured like degree courses — 6 to 18 months, essay-based, slow. No bespoke in-company delivery. No IoD partnership. Not designed for corporate L&D buyers who need fast, practical, measurable outcomes. No wellness, coaching, or soft skills short courses. Less focus on Malta-specific employer needs.
@@ -629,20 +629,42 @@ Use these when Mike is in a competitive sales situation, prepping a pitch, or as
 
 ---
 
+### BATTLECARD 9 — Mdina Partners
+**Website:** mdinapartners.com
+**What they are:** Malta-based HR advisory and training firm combining strategic HR consulting with coaching, leadership development, and organisational transformation. Think Talent's most direct brand competitor — same buyer (senior HR and leadership), similar outcomes focus, and comparable premium positioning. Tagline: "Change that starts with people."
+**Their strengths:** Strongest brand narrative of all competitors — memorable, senior-buyer-appropriate. Proprietary IP frameworks (DAMACA for leadership, PRISM Brain Mapping for profiling, PASSION for sales, ELEV8) create perceived differentiation and stickiness. Breadth of services (advisory + training + fractional CMO + corporate wellness) makes them hard to compare on price. Aspirational, transformational tone that appeals to C-suite and senior HR buyers.
+**Their weaknesses:** Blog and podcast both listed on website but completely inactive (blog returns 404, podcast inaccessible) — a credibility gap they've created and can't currently fill. No measurable social media presence. No visible client testimonials or case studies on their website. No MFHEA licensing, no MQF accreditations, no IoD credentials visible — meaning their clients cannot access government training funding. Appears to target larger organisations, potentially priced out of the SME sweet spot where TT operates.
+**TT differentiators:** Think Talent is MFHEA-licensed, OTHM-accredited, and IoD-partnered — credentials Mdina Partners does not display. TT's three-scheme funding navigation (MySkills, Get Qualified, IIS) means a client can get up to 80% of TT's cost covered; Mdina Partners has no equivalent pathway. TT carries named, high-profile Maltese client proof (Transport Malta, MFSA, Vassallo Group, St James Hospital) — Mdina shows no testimonials. Their frameworks are compelling but opaque; TT's qualifications carry MQF recognition that employers and employees can take anywhere. TT is the only provider that combines premium brand positioning with accessible funding and credentialled, portable outcomes.
+**Mike's line:** "Mdina Partners have a beautiful brand — but no credentials visible, no funding access for clients, and no published proof. We bring all three."
+
+---
+
+### BATTLECARD 10 — GMD Malta
+**Website:** gmdmalta.com
+**What they are:** Global Mindset Development Malta — niche training and mentoring provider specialising in cross-cultural communication, intercultural leadership, and global mobility support. Founder-led by Viviana Premazzi. Sessions in English, Italian, and Portuguese. Not a head-to-head competitor but competes for L&D budget in organisations with international or diverse workforces.
+**Their strengths:** Unique, clearly differentiated positioning — no direct competitor for the intercultural niche in Malta. Multi-language capability (English, Italian, Portuguese). Free introductory sessions lower the barrier to engagement. Warm, personal brand that resonates with multinational HR buyers. Genuine niche expertise.
+**Their weaknesses:** Very narrow niche limits total addressable market — most Maltese SMEs don't need dedicated intercultural training. Founder-dependent single-person operation with no scale. Website content largely static since 2021. No MQF accreditation, no access to government funding schemes. Cannot serve broad L&D needs beyond the intercultural niche.
+**TT differentiators:** GMD is a complement, not a competitor. If a client needs cross-cultural leadership for an expat or international workforce specifically, GMD is worth acknowledging. The moment they need management development, leadership programmes, team performance, or anything broader — TT is the natural choice. There is no meaningful overlap in core programme areas.
+**Mike's line:** "GMD are experts in intercultural training — a very specific niche. For anything beyond that, that's our territory."
+
+---
+
 ### Competitive Positioning Summary
 
 | Competitor | Primary threat | TT wins on |
 |---|---|---|
+| Mdina Partners | Brand narrative, same senior buyer | Credentials (MFHEA/OTHM/IoD), funding access, published client proof |
 | misco Malta | HR/consulting clients | Training-first identity, IoD, flagship programmes |
-| Malta Business School | Academic credentials MQF 6-7 | Practical outcomes, corporate delivery, funding |
+| Malta Business School / Allied Consultants | Academic credentials MQF 6-7 | Practical outcomes, corporate delivery, funding |
 | LEAD Training | Online/compliance training | Face-to-face, leadership depth, named clients |
 | FHRD | HR practitioner market | Whole-org development, leadership programmes |
 | Up Your Level | Executive coaching | Funded accredited programmes at scale |
 | LCTS Malta | ILM-accredited leadership | Brand, proof, client roster, MFHEA/OTHM |
 | People Learning | PRINCE2, broad catalogue | Focus, quality, leadership expertise |
 | PwC's Academy | Premium/board segment | Regular cohorts, funding access, value |
+| GMD Malta | Intercultural niche, multi-language | Different territory; no meaningful overlap |
 
-**Golden rule in any competitive conversation:** TT is the only Malta training provider with MFHEA + OTHM + IoD + PMI authorisation, flagship branded programmes (APEX/INSPIRE/PEAK) with named corporate proof, AND full three-scheme funding navigation (MySkills + Get Qualified + IIS). No competitor matches all four simultaneously.
+**Golden rule in any competitive conversation:** TT is the only Malta training provider with MFHEA + OTHM + IoD + PMI authorisation, flagship branded programmes (APEX/INSPIRE/PEAK) with named corporate proof, AND full three-scheme funding navigation (MySkills + Get Qualified + IIS). No competitor matches all four simultaneously. Mdina Partners is the most credible brand rival — same buyer, premium voice — but they carry no visible credentials and their clients cannot access funded schemes.
 
 ---
 
