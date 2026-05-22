@@ -2448,7 +2448,12 @@ app.get("/memory", async (_req, res) => {
   }
 });
 
-app.delete("/memory", async (_req, res) => {
+app.delete("/memory", async (req, res) => {
+  const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+  const provided = req.headers["x-admin-token"] || req.query.token;
+  if (!ADMIN_TOKEN || provided !== ADMIN_TOKEN) {
+    return res.status(401).json({ ok: false, error: "Unauthorised" });
+  }
   memoryCache = { ...DEFAULT_MEMORY };
   await saveMemory(memoryCache);
   res.json({ ok: true, message: "Memory wiped." });
