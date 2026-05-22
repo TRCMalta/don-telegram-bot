@@ -353,6 +353,123 @@ Services: Think Tank, Joint Ventures, Strategic Relationships, Shared Expertise,
 
 ---
 
+## TRC ENTERPRISE PARTNERSHIP — THE PITCH DECK
+
+This is the live 2026 Enterprise Partnership Pack used to invite future partners into The Remarkable Collective. Mike and Rachel lead the partnership expansion. Use this when Mike is preparing a partner pitch, writing a follow-up, or talking through what partnership with TRC means.
+
+### What the deck communicates
+
+**The problem TRC is solving in Malta** (Slide 3 — "What We're Up Against"):
+Five structural weaknesses in the Maltese market that TRC was built to address. Mike uses these to frame why The Collective exists:
+1. iGaming reliance — over-concentration in one sector, limiting diversification
+2. Lack of belief in HR — leadership development and people investment consistently underfunded
+3. Modern marketing gap — most Maltese businesses have weak or outdated marketing
+4. Fighting families — insular, siloed businesses that won't collaborate
+5. Minimal overseas opportunities — very few Maltese firms have cracked international markets
+These map to five strategic pillars of The Collective's mission: CONCENTRATION, CULTURE, CAPABILITY, GOVERNANCE, REACH.
+
+**The TRC model** (Slide 4):
+A continuous loop — not a one-off project. Five phases that cycle:
+1. Consult — diagnose the real problem before recommending anything
+2. Educate & Train — build capability inside the business at every level
+3. Integrate — plug solutions into day-to-day operations so they stick
+4. Implement — roll out with project ownership and on-the-ground support
+5. Review & Improve — measure, refine, and start the next loop
+Headline: "We don't deliver and disappear."
+
+**TRC's positioning claim** (Slide 5):
+"Malta's first and only holistic organisational and professional business asset to companies." The word they use internally: PIONEERS.
+
+**The TRC senior team** (Slide 6):
+- Dr Beverly Cutajar — Chairperson. PhD. Founder (2009). Strategic development, internationalisation, employer of record.
+- Mike Roberts — Group CEO. Business development, strategic growth.
+- Rachel Pool — Ceek CEO. Talent acquisition, workforce planning, HR & mentoring, local payroll, ERP/CRM.
+- Marcel Grech Mallia — Group CCO. Communications, marketing solutions, channel development, customer retention.
+
+**The management team** (Slide 7):
+- Jonathan Cremona — Head of Marketing & Technology. Marketing, advertising, social, PR, AI & coding. Also Partner Relations.
+- Mario Cordina — Training Solutions + Partner MSG. Training & trainer coordination, student development, subject matter expertise.
+- Jamie Osbourne — Coaching. Coaching & leadership coordination, personal development, mentoring.
+- Robert Sultana — Student Solutions. Student acquisition, visa management, programme planning.
+- Joseph Portelli — Strategic Growth. Client management, business development.
+- Suzanne Cutajar — BD / Sales counterpart (mentioned in alignment slide).
+
+**Subject matter experts bench** (Slide 8): Ten on-demand specialists covering training, HR, comms, tenders, retail, AI and beyond. Names: Nicola, Cristina, Paul, Jes, Sue, Roz, Ron, Mari, Daniel, Valariya.
+
+**Strategic partners roster** (Slide 17 — 14 senior advisors plugged in on demand):
+- Fabio Spiteri — Motivational Speaker
+- Dr Roberto Lepre — ESG Advisory
+- David Zemmit — Corporate Strategy
+- Alan Caruana — Business Funding
+- Ray Calieja — Coach & Presenter
+- Dr Alexiei Dingli — AI Industry Leader
+- Kevin Borg — Sales Growth
+- Zenah Hemeden — Project Management
+- Alan Melick — Finance & Governance
+- Philip Faruqia — Operational Transformation
+- Roger Bugeja — Operations & Education
+- Ivan Borg Ferrando — Hospitality Management
+- Joseph Bonanno — Tender Management
+- Jonathan Spiteri — Strategy & Transformation
+
+### Three types of enterprise partner (Slide 15)
+
+1. **Independent Senior** — Consultants and subject matter experts, typically working for themselves after 20-30 years in business. Niche experience, collaborative day-to-day, surfacing new opportunities through depth not headcount.
+2. **Local Businesses** — Malta-based businesses that can install and implement consulting projects, providing wider capability and on-the-ground delivery through multiple proven services.
+3. **International Vehicles** — Cross-border partner companies extending TRC's reach internationally.
+
+### Six structural advantages of joining The Collective (Slide 12)
+
+1. **Multiple points of engagement** — Eight pillars of collaboration; clients meet TRC across many surfaces, not just one offer.
+2. **Partner Share** — Unlocks recurring revenue from work neither side could win alone.
+3. **Collaborative credibility** — Sit alongside Malta's most trusted brand names; The Collective lifts every member.
+4. **Cross-sell & upsell** — Warm introductions across the network.
+(Two more stated on the slide; content partially obscured in source.)
+
+### Membership criteria (Slide 13)
+
+The Collective is not open to everyone. Criteria:
+- Maltese businesses only
+- Like-minded people who share TRC's values
+- Must understand that change has to come to the Maltese market
+- Must seek international opportunities as part of a collective, not alone
+
+### The alignment process when a partner joins (Slide 19)
+
+Counterpart-to-counterpart workshops across each department to agree USPs, content, delivery, cross-sell, PR, training, and compliance. TRC assigns named leads per workstream:
+- Project leads: Rachel Pool + Marcel Grech Mallia
+- Marketing/PR: Jonathan Cremona + Robert Sultana
+- Training: Mario Cordina
+- BD/Sales: Marcel Grech Mallia
+- Strategic Growth: Joseph Portelli
+- Partner MSG: Mario Cordina
+- Legal/Contract: TBD counterpart
+- TA/Recruitment: counterpart aligned
+
+### What's next for The Collective (Slide 18)
+
+Six commitments:
+1. More partnerships
+2. European Learning Centre
+3. International alliances
+4. Collective growth projects
+5. International expansion
+6. Alignment with ICF, EMCC, PMI, CMI, AC & IOC
+
+### Existing enterprise partners (Slide 16)
+
+The Workhouse is named as a current enterprise partner.
+
+### Why partner at all — the macro argument (Slide 14)
+
+Two reasons TRC gives potential partners:
+1. Raise the quality of what Malta produces — new technologies, open collaboration, best practice, due diligence, competing credibly against non-Maltese brands.
+2. Expand internationally together — pooling resources, skills, expertise, and opportunities from like-minded partners who see the benefit of approaching international expansion as a Collective.
+
+**Mike's headline for partnership conversations:** "Together, we're stronger." (Slide 21 — the deck's closing line.)
+
+---
+
 ## IoD COURSES — INSTITUTE OF DIRECTORS (Malta delivery via Think Talent)
 
 Think Talent is the official IoD delivery partner in Malta. Mike can quote and propose these for boards, directors, and senior leaders. Contact for all IoD matters: Jamie Osborne, Head of Training Solutions — jamie@thinktalent.com.mt, +356 2703 0133.
