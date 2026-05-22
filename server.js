@@ -17,6 +17,9 @@ import express from "express";
 import { Anthropic } from "@anthropic-ai/sdk";
 import https from "https";
 import http from "http";
+import { readFile, writeFile } from "fs/promises";
+import { existsSync } from "fs";
+import path from "path";
 
 const app = express();
 app.use(express.json());
@@ -47,6 +50,135 @@ const ALLOWED_USERS = (process.env.ALLOWED_TELEGRAM_USERS || "")
   .filter(Boolean);
 
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+
+// ─── Persistent memory ─────────────────────────────────────────────────────────
+// Uses /data (Railway volume) when mounted, falls back to /tmp (ephemeral)
+const MEMORY_DIR = existsSync("/data") ? "/data" : "/tmp";
+const MEMORY_FILE = path.join(MEMORY_DIR, "don-memory.json");
+const MEMORY_EXTRACTION_MODEL = "claude-haiku-4-20250514";
+
+const DEFAULT_MEMORY = {
+  version: 2,
+  lastUpdated: null,
+  preferences: [],   // max 20 — things Mike consistently prefers
+  keyFacts: [],      // max 30 — specific facts about deals/projects/context
+  people: {},        // name → note
+  recentTopics: [],  // max 10 — {date, topic}
+};
+
+let memoryCache = null;
+
+async function loadMemory() {
+  if (memoryCache) return memoryCache;
+  try {
+    const raw = await readFile(MEMORY_FILE, "utf8");
+    memoryCache = { ...DEFAULT_MEMORY, ...JSON.parse(raw) };
+    console.log(`[MEMORY] Loaded from ${MEMORY_FILE}: ${memoryCache.preferences.length} prefs, ${memoryCache.keyFacts.length} facts`);
+  } catch {
+    memoryCache = { ...DEFAULT_MEMORY };
+    console.log(`[MEMORY] No existing file — starting fresh at ${MEMORY_FILE}`);
+  }
+  return memoryCache;
+}
+
+async function saveMemory(mem) {
+  memoryCache = mem;
+  mem.lastUpdated = new Date().toISOString();
+  try {
+    await writeFile(MEMORY_FILE, JSON.stringify(mem, null, 2), "utf8");
+    console.log(`[MEMORY] Saved — ${mem.preferences.length} prefs, ${mem.keyFacts.length} facts`);
+  } catch (err) {
+    console.error("[MEMORY] Save failed:", err.message);
+  }
+}
+
+function buildMemoryContext(memory) {
+  const parts = [];
+  if (memory.preferences.length) {
+    parts.push("## Learnt preferences (apply these without announcing them)\n" + memory.preferences.map((p) => `- ${p}`).join("\n"));
+  }
+  if (memory.keyFacts.length) {
+    parts.push("## Key facts\n" + memory.keyFacts.slice(-20).map((f) => `- ${f}`).join("\n"));
+  }
+  if (Object.keys(memory.people).length) {
+    parts.push("## People notes\n" + Object.entries(memory.people).map(([n, v]) => `- ${n}: ${v}`).join("\n"));
+  }
+  if (memory.recentTopics.length) {
+    parts.push("## Recent conversation topics\n" + memory.recentTopics.slice(-5).map((t) => `- ${t.date}: ${t.topic}`).join("\n"));
+  }
+  if (!parts.length) return "";
+  return "\n\n---\n\n## DON'S MEMORY — PERSISTENT CONTEXT\n\n" + parts.join("\n\n") + "\n\nUse this context naturally. Never announce that you \"remember\" something — just use it.";
+}
+
+// Fire-and-forget after each reply — extracts new learnings via haiku, updates memory file
+async function extractAndUpdateMemory(userMessage, assistantReply) {
+  try {
+    const memory = await loadMemory();
+    const today = new Date().toISOString().split("T")[0];
+
+    const extraction = await anthropic.messages.create({
+      model: MEMORY_EXTRACTION_MODEL,
+      max_tokens: 400,
+      system: `You are a memory extractor for Don, an AI Chief of Staff for Mike Roberts (CEO of TRC, Malta).
+Extract ONLY genuinely new long-term information from this exchange.
+Return JSON only, no prose: { "preferences": [], "keyFacts": [], "people": {}, "topic": "" }
+- preferences: communication/style preferences Mike consistently shows. E.g. "Prefers bullet points over prose for pipeline summaries". Max 2, empty array if none.
+- keyFacts: specific facts about deals, clients, decisions, or context Mike will want Don to know long-term. Prefix each with today's date ${today}. Max 3, empty array if routine.
+- people: new people mentioned with their role/context (only if new or updated). Empty object if none.
+- topic: 1-sentence label for this conversation's main subject. Empty string if trivial/routine.
+Do NOT extract: greetings, generic queries, things already obvious from context, or temporary state.`,
+      messages: [
+        {
+          role: "user",
+          content: `Mike said: ${userMessage.substring(0, 600)}\n\nDon replied: ${assistantReply.substring(0, 600)}`,
+        },
+      ],
+    });
+
+    const text = extraction.content[0]?.text || "{}";
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return;
+    const update = JSON.parse(jsonMatch[0]);
+
+    let changed = false;
+
+    if (Array.isArray(update.preferences)) {
+      for (const p of update.preferences) {
+        if (p && !memory.preferences.some((existing) => existing.toLowerCase() === p.toLowerCase())) {
+          memory.preferences.push(p);
+          changed = true;
+        }
+      }
+      if (memory.preferences.length > 20) memory.preferences = memory.preferences.slice(-20);
+    }
+
+    if (Array.isArray(update.keyFacts)) {
+      for (const f of update.keyFacts) {
+        if (f) { memory.keyFacts.push(f); changed = true; }
+      }
+      if (memory.keyFacts.length > 30) memory.keyFacts = memory.keyFacts.slice(-30);
+    }
+
+    if (update.people && typeof update.people === "object") {
+      for (const [name, note] of Object.entries(update.people)) {
+        if (name && note) { memory.people[name] = note; changed = true; }
+      }
+    }
+
+    if (update.topic && typeof update.topic === "string" && update.topic.trim()) {
+      const last = memory.recentTopics[memory.recentTopics.length - 1];
+      if (!last || last.topic !== update.topic.trim()) {
+        memory.recentTopics.push({ date: today, topic: update.topic.trim() });
+        changed = true;
+      }
+      if (memory.recentTopics.length > 10) memory.recentTopics = memory.recentTopics.slice(-10);
+    }
+
+    if (changed) await saveMemory(memory);
+  } catch (err) {
+    console.error("[MEMORY] Extraction failed:", err.message);
+  }
+}
 
 // ─── Malta time helpers ───────────────────────────────────────────────────────
 function getMaltaDate() {
@@ -80,7 +212,8 @@ function getMaltaGreetingHint() {
 }
 
 // ─── Don's System Prompt ──────────────────────────────────────────────────────
-function buildSystemPrompt() {
+function buildSystemPrompt(memory = null) {
+  const memoryBlock = memory ? buildMemoryContext(memory) : "";
   return `Today's date is ${getMaltaDate()}. The current time in Malta is ${getMaltaTime()} (${getMaltaGreetingHint()}). Greet ${MIKE_FORM_OF_ADDRESS} appropriately — "Good morning", "Good afternoon", or "Good evening". NEVER greet with the wrong time of day.
 
 You are Don, the personal AI Chief of Staff for Mike Roberts, CEO of The Remarkable Collective (TRC).
@@ -127,7 +260,7 @@ You serve Mike. Not Beverly, not Jonathan, not the exec team. They may appear in
 8. **Never apologise for being an AI.**
 9. **British English** spelling and conventions. Always.
 10. **No long paragraphs.** If a paragraph runs past three lines on a phone, break it up.
-11. **No em-dashes (—), en-dashes (–) or decorative hyphens** in your messages. Use full stops or commas. Word hyphens inside compound words are fine ("decision-making", "exec-team").
+11. **No em-dashes (—), en-dashes (–) or decorative hyphens** in your messages. Use full stops or commas. Word hyphens inside compound words are fine ("decision-making", "exec-team").${memoryBlock}
 
 ---
 
@@ -1188,14 +1321,17 @@ async function handleMessage(chatId, userMessage, userName) {
   await sendTypingAction(chatId);
 
   try {
-    const previousMessages = getConversationHistory(chatId);
+    const [previousMessages, memory] = await Promise.all([
+      Promise.resolve(getConversationHistory(chatId)),
+      loadMemory(),
+    ]);
     const messages = [...previousMessages, { role: "user", content: userMessage }];
     console.log(`[MEMORY] ${chatId}: ${previousMessages.length} prior entries + new`);
 
     let response = await anthropic.messages.create({
       model: CLAUDE_MODEL,
       max_tokens: 4096,
-      system: buildSystemPrompt(),
+      system: buildSystemPrompt(memory),
       tools: DON_TOOLS,
       messages,
     });
@@ -1231,7 +1367,7 @@ async function handleMessage(chatId, userMessage, userName) {
       response = await anthropic.messages.create({
         model: CLAUDE_MODEL,
         max_tokens: 4096,
-        system: buildSystemPrompt(),
+        system: buildSystemPrompt(memory),
         tools: DON_TOOLS,
         messages,
       });
@@ -1252,7 +1388,7 @@ async function handleMessage(chatId, userMessage, userName) {
       response = await anthropic.messages.create({
         model: CLAUDE_MODEL,
         max_tokens: 4096,
-        system: buildSystemPrompt(),
+        system: buildSystemPrompt(memory),
         messages,
       });
     }
@@ -1267,6 +1403,11 @@ async function handleMessage(chatId, userMessage, userName) {
     addToConversationHistory(chatId, "assistant", reply);
 
     await sendTelegram(chatId, reply);
+
+    // Async memory extraction — fire and forget, never blocks the reply
+    extractAndUpdateMemory(userMessage, reply).catch((err) =>
+      console.error("[MEMORY] Background extraction error:", err.message)
+    );
   } catch (err) {
     console.error(`[ERROR] handleMessage ${chatId}:`, err?.status || err?.code || "", err?.message || err);
     let errorMsg;
@@ -1380,6 +1521,21 @@ app.get("/webhook-info", async (_req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+app.get("/memory", async (_req, res) => {
+  try {
+    const mem = await loadMemory();
+    res.json({ storage: MEMORY_FILE, memory: mem });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete("/memory", async (_req, res) => {
+  memoryCache = { ...DEFAULT_MEMORY };
+  await saveMemory(memoryCache);
+  res.json({ ok: true, message: "Memory wiped." });
 });
 
 app.get("/debug", async (_req, res) => {
