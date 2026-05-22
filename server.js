@@ -295,6 +295,50 @@ TRC is a Malta-based professional services group. Mike Roberts is CEO. Four spec
 
 ---
 
+## TRC BRAND IDENTITY — VOICE, PROMISE & RULES
+
+Source: TRC Brand Guidelines v1.0 (May 2026, owner: Jonathan Cremona). Use this whenever you are drafting copy, reviewing a deck, or advising on how TRC should sound.
+
+### Positioning (exact, memorise this)
+"The Remarkable Collective is a 360° business solutions provider for ambitious Maltese enterprises that refuse to settle for average. We are not a Big-4: we don't sell decks. We are not a boutique: we don't sell single specialisms. We sit between — a four-brand collective delivering eight integrated pillars under one senior partner, one roadmap, total accountability."
+
+### Brand promise (exact, memorise this)
+**"We don't sell you a report. We help you build the business."**
+This is the single sentence everything else aligns with. The closing line of every major pitch.
+
+### Core brand attributes
+
+| Attribute | What it means | What it kills |
+|---|---|---|
+| Editorial | Long-form, considered, magazine-grade craft | Stock-photo corporate blandness |
+| Senior | Practitioners not juniors; partner-led | Account-managed hand-offs |
+| Integrated | One contract, four brands, eight pillars | Pitch-then-disappear consultancies |
+| Maltese & ambitious | Local roots, global standard | Provincial small-thinking |
+| Restrained | One gold accent, generous space, no hype | Neon CTAs, exclamation marks |
+
+### Voice — do / don't
+
+**DO:** "Each discipline is delivered by a senior practitioner, not a junior consultant briefed the night before."
+**DON'T:** "🚀 Unlock your team's potential with our world-class experts!"
+
+**DO:** "Eight integrated pillars, delivered by a single collective."
+**DON'T:** "We provide a comprehensive suite of best-in-class solutions across the talent lifecycle."
+
+**Voice in one sentence:** *Editorial, senior, restrained. Sentence case. No exclamation. One gold accent per surface.*
+
+### Naming rules (non-negotiable in customer-facing copy)
+- Always write full names on first mention: **The Remarkable Collective** (subsequent: TRC), **Think Talent**, **Think Talent Institute**, **Think & Consult** (with the ampersand, no spaces around it), **Ceek Talent**
+- NEVER abbreviate sub-brand names. "TT" / "TTI" / "T&C" / "CT" are internal jargon only — never appear in a proposal, email to a client, or any customer-facing output.
+- On sub-brand properties (thinktalent.com.mt etc.): TRC is referenced as text only — "Part of The Remarkable Collective." No TRC logo in the header or hero.
+
+### Key visual rule (for deck/proposal reviews)
+**One gold accent per surface.** Gold-text heading OR gold-fill CTA — never both at full strength on the same slide/section. If you're tempted to add a second gold moment, kill the first. If a partner asks "is this on-brand?", the answer lives in the brand guidelines. If the answer isn't there, it doesn't belong in the brand yet.
+
+### Governance — what requires Jonathan's sign-off
+Locked (no change without Jonathan): the gold gradient colour stops, the type scale, the dark/paper section rhythm, the italic-only-for-gold rule, the one-gold-accent-per-surface rule. Source of truth for strategic rules = Brand Guidelines v1.0. Source of truth for technical tokens = design.md. Production reference = theremarkablecollective.com.
+
+---
+
 ## THE TRC MODEL — EIGHT PILLARS
 
 This is TRC's collective offer: eight integrated pillars of business growth, delivered across the four brands. Mike pitches these when selling The Collective as a whole. When he's drafting proposals, quotes, or emails, draw on the right pillars for the client's situation.
@@ -467,6 +511,195 @@ Two reasons TRC gives potential partners:
 2. Expand internationally together — pooling resources, skills, expertise, and opportunities from like-minded partners who see the benefit of approaching international expansion as a Collective.
 
 **Mike's headline for partnership conversations:** "Together, we're stronger." (Slide 21 — the deck's closing line.)
+
+---
+
+## TRC PARTNER ONBOARDING — 2026 COMMERCIAL TERMS & RATES
+
+Source: May 2026 TRC Partner Onboarding Brochure. Use when Mike is in a partner conversation, quoting rates, structuring a deal, or explaining the commercial model to a prospective or existing partner. All prices exc. VAT.
+
+### Mike's welcome framing (condensed)
+The Collective exists to move Malta beyond outdated models, legacy relationships, and short-term thinking. Partners get: cross-collaboration between brands/sectors/specialists; access to shared knowledge, clients, and growth opportunities; a strong marketing and partnership infrastructure; backing of a community committed to raising the bar for business excellence in Malta; inclusion in a national message that celebrates innovation, transparency, and capability. "This is more than a partnership — it's a movement."
+
+### Partner types
+
+**Enterprise Partners** — Established Maltese businesses with 5+ employees who share TRC values of progress, innovation, and collaboration. They get: preferential service rates across all 8 pillars; co-creation and market insight sharing; BD initiatives, joint projects, referral opportunities; new lead generation streams; a voice in shaping Malta's modern business movement.
+
+**Strategic Partners** — Highly skilled individuals, consultants, and specialists who bring niche expertise to The Collective's wider offering. They operate independently while contributing knowledge. Benefits: professional network + TRC brand association; greater leads and collaborative opportunities; access to shared projects; ability to influence strategic initiatives and national transformation.
+
+**Alliance Partners** — International organisations and networks sharing TRC's vision for holistic growth. They unlock privileged access for Strategic and Enterprise Partners to global joint ventures, cross-market collaborations, and multi-country projects. "The world is now within reach."
+
+### What partnership provides (to any partner)
+- Preferential rates on all TRC services for internal use (Recruitment, Coaching, Training, Consulting)
+- Revenue-sharing: partner introduces TRC solutions to their own clients under a shared profit model
+- Access to 8 Pillars without additional infrastructure or headcount
+- Brand alignment with TRC
+- Collaboration tools and direct communication with TRC teams
+
+### The Collective's eco-system motto
+**Connecting Capability, Collaboration, Credibility**
+
+### TRC tagline
+**Think Ahead. Get Ahead. Stay Ahead.**
+
+---
+
+### 2026 Partner Preferential Service Rates (exc. VAT)
+
+#### 1. Recruitment & Talent Acquisition — Ceek Talent
+
+| Rate type | Fee | TRC Share | Partner Share |
+|---|---|---|---|
+| Internal Partner Rate (exclusive roles) | *10% of annual remuneration | — | — |
+| Internal Partner Rate (exclusive + priority) | **15% of annual remuneration | — | — |
+| Client Partner Rate | 15%–18% of annual remuneration | 80% | 20% |
+| Typical Market Rate | 15%–25% | — | — |
+
+Example: €50k salary at 15% = €7,500 fee; partner share at 20% = €1,500. At 18% = €9,000 fee; partner share = €1,800.
+
+Terms: Special partnership agreement to be signed. Free replacement (2–12 weeks depending on vacancy). Partner cc/bcc in all client comms (transparent). Ceek invoices. TRC cross/upsell. Paid 14 days after customer settlement; otherwise normal rates apply.
+
+---
+
+#### 2. Executive Coaching — Think Talent
+
+| Rate type | Coaching rate | TRC Share | Partner Share |
+|---|---|---|---|
+| Internal Partner Rate | €90/hr | — | — |
+| Client Partner Rate | €120/hr | 75% | 25% |
+| Typical Market Rate | €150/hr | — | — |
+
+Example: 4 hrs coaching at €120/hr = €480; partner share at 25% = €120.
+
+Terms: Personalised sessions by Think Talent certified coaches. Minimum 4-hour package. 1 hour free pre-consultation. Fully customisable. Think Talent invoices. Paid 14 days after customer settlement.
+
+---
+
+#### 3. Corporate Training B2B Face-to-Face — Think Talent
+
+**Accredited & Non-Accredited, Client or TT venue, groups up to 15 pax (IIS limits to 10 pax):**
+
+| Programme | Market Price | Partner Rate | Partner Client Rate | Partner Share |
+|---|---|---|---|---|
+| Half Day | €780 | €650 | €700 | 10% |
+| Full Day | €1,495 | €1,250 | €1,350 | 10% |
+| 2 Full Day | €2,900 | €2,400 | €2,500 | 10% |
+| 3 Full Day | €4,185 | €3,500 | €3,800 | 10% |
+| APEX Leadership (12 months) | €32,000 | €22,000 | €28,000 | 10% |
+| INSPIRE Leadership (12 months) | €25,500 | €19,000 | €22,000 | 10% |
+
+**IIS Reimbursements Available 2026/27 (based on groups of 10, per Jobsplus figures):**
+
+| Programme | Small Entity (70%) | Medium Entity (60%) | Large Entity (50%) |
+|---|---|---|---|
+| Half-Day | €1,171.24 | €1,003.91 | €836.59 |
+| Full-Day | €2,186.31 | €1,873.97 | €1,561.63 |
+| 2 Full Day | €4,372.62 | €3,747.94 | €3,123.26 |
+| 3 Full Day | €6,558.93 | €5,621.91 | €4,684.89 |
+| APEX (12 months) | €28,734.36 | €24,629.32 | €20,524.28 |
+| INSPIRE (12 months) | €28,734.36 | €24,629.32 | €20,524.28 |
+
+Note: IIS figures based on Jobsplus 2027 release as at time of publication. Lesser numbers qualify for a smaller refund.
+
+**Online Corporate Training B2B (for overseas, remote, or self-employed/contractor students who do not claim IIS funding, max 15 pax, non-accredited):**
+
+| Course | Market Price | Partner Rate | Partner Client Rate | Partner Share |
+|---|---|---|---|---|
+| Excel / Google Sheets (14 hrs) | €3,100 | €2,100 | €2,700 | 10% |
+| Business English & Writing (8 hrs) | €1,800 | €1,200 | €1,500 | 10% |
+| Emotional Intelligence (8 hrs) | €1,800 | €1,200 | €1,500 | 10% |
+| Handling Difficult Conversations (8 hrs) | €1,800 | €1,200 | €1,500 | 10% |
+| Managing People Remotely (4 hrs) | €750 | €450 | €600 | 10% |
+| Emerging Leaders (21 hrs) | €3,800 | €3,000 | €3,500 | 10% |
+| Project Management (8 hrs) | €1,800 | €1,200 | €1,500 | 10% |
+| Complaint Handling (4 hrs) | €750 | €450 | €600 | 10% |
+| Time Management (4 hrs) | €750 | €450 | €600 | 10% |
+| Effective Communication (8 hrs) | €1,800 | €1,200 | €1,500 | 10% |
+| Managing Change (8 hrs) | €1,500 | €1,000 | €1,300 | 10% |
+| Managing Performance through Feedback & Effective Appraisals (16 hrs) | €2,600 | €1,850 | €2,200 | 10% |
+
+**B2C Training Courses (per person) — IIS & Get Qualified funds available:**
+
+| Course | Market Price | Partner Rate | Partner Client Rate | Share Split |
+|---|---|---|---|---|
+| APEX Award leadership (92 hrs) | €3,840 | €2,740 | €3,240 | 10% |
+| INSPIRE Award leadership (92 hrs) | €3,240 | €2,440 | €2,740 | 10% |
+| Coaching & Mentoring (64 hrs) | €2,800 | €2,100 | €2,400 | 10% |
+| Sales Skills & Techniques (21 hrs) | €600 | €420 | €500 | 10% |
+| Public Speaking & Presentation (21 hrs) | €600 | €420 | €500 | 10% |
+| Train The Trainer (21 hrs) | €600 | €420 | €500 | 10% |
+
+All B2C prices per person, subject to availability and scheduled course dates.
+
+---
+
+#### 4. Institute of Directors (IoD) Training — Think Talent (Malta's ONLY authorised IoD UK provider)
+
+IoD International Membership: Member rate €275. Partner rate €265. Partner Client rate €265. No margin paid.
+
+**IoD Courses (partner rate = member rate; 5% partner share on all):**
+
+| Course | Member Rate | Non-Member Rate | Partner Rate | Partner Client Rate |
+|---|---|---|---|---|
+| Role of Director and the Board (2 days) | €4,125 | €4,630 | €3,700 | €4,000 |
+| Leadership for Directors (2 days) | €4,125 | €4,630 | €3,700 | €4,000 |
+| Finance for non-Finance Directors (3 days) | €4,595 | €5,300 | €3,850 | €4,150 |
+| Strategy for Directors (3 days) | €4,595 | €5,300 | €3,850 | €4,150 |
+| Developing Board Performance (3 days) | €5,200 | €6,100 | €4,700 | €5,000 |
+| Role of Managing Director (1 day) | €1,550 | €1,950 | €1,300 | €1,500 |
+| Diploma in Company Direction (3 days) | €5,700 | €6,600 | €5,100 | €5,400 |
+| Role of the Company Secretary (1 day) | €1,550 | €1,950 | €1,300 | €1,500 |
+| Role of the Non-Executive Director (1 day) | €1,950 | €2,250 | €1,800 | €1,850 |
+| Role of the Chair (1 day) | €1,550 | €1,950 | €1,300 | €1,500 |
+| Certificate in Company Direction (5 days) | €13,925 | €17,825 | €13,000 | €13,500 |
+
+Terms: Includes first exam sitting for each module (€200). Facilitated in Malta. Note: rates subject to GBP/EUR exchange fluctuations (IoD prices are in British pounds).
+
+---
+
+#### 5. Solution Consulting — Think & Consult
+
+Access to The Remarkable Solution Matrix: over 70 consultative products. Includes:
+Organisational Design, Business Process Reengineering, AI Integration, Training Needs Analysis, HR Strategy, Market Research, Business Planning, ESG Support, EU Funding, Immigration, International Expansion.
+
+**International Advisory (price on request — bespoke per collaboration):**
+Corporate Training (FIFO/online), Executive Coaching (FIFO/online), Employer of Record (expansion facility), Entity Formation (expansion facility), Headhunting (key target recruitment), Search & Selection (international search), Settlers Assistance (relocation support), Migration Support (info & application), GTM Expansion (service/product projection).
+
+Advisory pricing model: partners agree a percentage share or specific fees based on formalised deliverables. No fixed rate card — bespoke per engagement.
+
+---
+
+#### 6. End Customer Invoicing
+
+The partner with the largest monetary portion of the solution invoices the end customer directly. They apply the same payment terms provided to the client, and expect payment once the client settles. If revenue share is equal, the introducing partner invoices. Partners may agree different arrangements ad-hoc.
+
+---
+
+### Operations & Vision — key initiatives coming
+
+- **Partner Board** — each partner holds a seat, shaping The Collective's direction and priorities
+- **Quarterly networking breakfasts and roundtables** — share leads, case studies, opportunities
+- **Annual Collective Conference** — celebrating partner successes, unveiling future collaborations
+- **International expansion programmes** — starting with Dubai, London, and the EU
+- **Shared thought-leadership** — research papers, panel events, white papers on future of business in Malta
+- **Policy influence** — partners contribute to recommendations on Maltese business legislation
+- **International Collectives** — extending the model globally
+
+---
+
+### Reward & Award
+
+TRC is designing an awards and incentive system for individual sales/business consultants within The Collective: motivation prizes, awards of achievement, activity/results-driven incentives.
+
+---
+
+### Key Terms & Conditions
+
+- **Featured pricing subject to change** — rates in the onboarding pack are informational; always confirm current rates before quoting to a partner's client.
+- **Offer stacking restriction** — partner discount rates cannot be combined with seasonal promotions (e.g., Black Friday). Partner picks one or the other.
+- **Right to amend rates** — TRC and subsidiaries can update rates during the calendar year; partners notified within a commercially reasonable timeframe.
+- **Protection of previous transactions** — rates agreed and finalised before a rate change are honoured for that transaction only.
+- **Common standards** — all partners sign Partnership Agreement and NDA. All shared information, IP, and collaborative work remains secure.
 
 ---
 
