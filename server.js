@@ -24,6 +24,48 @@ import path from "path";
 const app = express();
 app.use(express.json());
 
+// ─── Crash-safe process-level handlers ────────────────────────────────────────
+// Fail fast on any unhandled async failure so Railway restarts the container
+// instead of leaving the event loop wedged. Mirror of the defence shipped to
+// Sam in commit d85f568 after the 2026-05-19 nine-day silent zombie outage.
+process.on('unhandledRejection', (err) => {
+  console.error('[FATAL] Unhandled rejection:', err && err.stack ? err.stack : err);
+  process.exit(1);
+});
+process.on('uncaughtException', (err) => {
+  console.error('[FATAL] Uncaught exception:', err && err.stack ? err.stack : err);
+  process.exit(1);
+});
+
+// ─── Generic helpers — timeout wrapper + structured logger ────────────────────
+// withTimeout: races a promise against a deadline, clearing the timer if the
+// promise wins. Used as a per-tool budget so a single hung upstream cannot
+// block the Claude tool-use loop indefinitely.
+function withTimeout(promise, ms, label) {
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(
+      () => reject(new Error(`${label} exceeded ${ms}ms budget`)),
+      ms,
+    );
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timeoutId));
+}
+
+// logEvent: single-line structured log emitter, format:
+//   [KIND] key1=value1 key2=value2 ...
+// Greppable in Railway log search, parseable by ad-hoc awk/jq pipelines.
+// Long string values truncated to 200 chars.
+function logEvent(kind, fields = {}) {
+  const parts = [`[${kind}]`];
+  for (const [k, v] of Object.entries(fields)) {
+    if (v === undefined || v === null) continue;
+    const s = typeof v === 'string' ? v.replace(/\s+/g, ' ').slice(0, 200) : v;
+    parts.push(`${k}=${s}`);
+  }
+  console.log(parts.join(' '));
+}
+
 // ─── Config ───────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
@@ -49,7 +91,26 @@ const ALLOWED_USERS = (process.env.ALLOWED_TELEGRAM_USERS || "")
   .map((s) => s.trim())
   .filter(Boolean);
 
-const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+// Admin Telegram chat IDs — receive operator-level alerts (milo-api watchdog
+// firing, etc.). Falls back to ALLOWED_TELEGRAM_USERS so existing deployments
+// alert the same humans without needing a new env var.
+const ADMIN_TELEGRAM_CHAT_IDS = (
+  process.env.ADMIN_TELEGRAM_CHAT_IDS || process.env.ALLOWED_TELEGRAM_USERS || ""
+)
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+// Reverse watchdog target — Don pings milo-api so the two services monitor
+// each other. Mirrors the symmetric watchdog shipped to Sam in 5444d34.
+const MILO_HEALTH_URL =
+  process.env.MILO_HEALTH_URL
+  || "https://milo-api-production-51c3.up.railway.app/api/health";
+
+// Anthropic client — 60s hard timeout prevents event-loop wedge on Claude
+// API hang. Covers all four messages.create call sites (haiku memory
+// extractor + three messages.create paths in the tool-use loop).
+const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY, timeout: 60000 });
 
 // ─── Persistent memory ─────────────────────────────────────────────────────────
 // Uses /data (Railway volume) when mounted, falls back to /tmp (ephemeral)
@@ -1533,6 +1594,9 @@ async function msGraphGet(path) {
 
 async function msGraphPost(path, body) {
   const token = await msGraphAuth();
+  // 30s hard timeout — matches fetchJSON helper. Same defence Sam shipped
+  // after the 2026-05-19 outage where untimed msGraphPost wedged the loop
+  // during create_beverly_calendar_event.
   const res = await fetch("https://graph.microsoft.com/v1.0" + path, {
     method: "POST",
     headers: {
@@ -1540,6 +1604,7 @@ async function msGraphPost(path, body) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(30000),
   });
   if (res.status === 202 || res.status === 204) return { success: true };
   const text = await res.text();
@@ -1753,6 +1818,31 @@ async function sendTypingAction(chatId) {
     });
   } catch (_) {
     /* non-critical */
+  }
+}
+
+/**
+ * Fan out an operator-level alert to every configured admin chat via
+ * Telegram. Independent of any Resend/email transport — so a Resend
+ * outage cannot silence Don's own alerts. Failures per recipient logged
+ * but never thrown.
+ */
+async function alertAdmin(text) {
+  if (ADMIN_TELEGRAM_CHAT_IDS.length === 0) {
+    console.warn(`[ALERT] ADMIN_TELEGRAM_CHAT_IDS empty — dropping alert: ${text.slice(0, 200)}`);
+    return;
+  }
+  if (!TELEGRAM_TOKEN) {
+    console.warn(`[ALERT] TELEGRAM_TOKEN missing — dropping alert: ${text.slice(0, 200)}`);
+    return;
+  }
+  for (const chatId of ADMIN_TELEGRAM_CHAT_IDS) {
+    try {
+      await sendTelegram(chatId, text);
+      logEvent('ALERT_SENT', { chat: chatId, len: text.length });
+    } catch (err) {
+      console.error(`[ALERT] Failed to deliver to chat ${chatId}: ${err.message}`);
+    }
   }
 }
 
@@ -2230,8 +2320,85 @@ setInterval(() => {
   }
 }, 10 * 60 * 1000);
 
+// ─── Reverse watchdog — Don monitors milo-api ────────────────────────────────
+// milo-api runs the primary every-5-min Don health monitor (see milo-api
+// scheduler.js). If milo-api itself dies, no one alerts on Don. This
+// reverse watchdog closes the loop: Don pings milo-api every 5 minutes and
+// Telegram-alerts the admin chat list after 2 consecutive misses. Mirrors
+// the symmetric watchdog shipped to Sam in 5444d34 — combined with the
+// external uptime monitor (cron-job.org), silence requires three independent
+// services to fail simultaneously, which is the bulletproof bar.
+const miloWatchdog = {
+  consecutiveFailures: 0,
+  isDown: false,
+  lastAlertAt: 0,
+};
+const MILO_WATCHDOG_FAIL_THRESHOLD = 2;
+const MILO_WATCHDOG_ALERT_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour while down
+setInterval(async () => {
+  let ok = false;
+  let detail = '';
+  const t = Date.now();
+  try {
+    const res = await fetch(MILO_HEALTH_URL, {
+      method: 'GET',
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok) {
+      detail = `HTTP ${res.status} after ${Date.now() - t}ms`;
+    } else {
+      ok = true;
+    }
+  } catch (err) {
+    detail = err.name === 'TimeoutError' || err.name === 'AbortError'
+      ? `Timeout after ${Date.now() - t}ms`
+      : `Fetch error: ${err.message}`;
+  }
+  if (ok) {
+    if (miloWatchdog.isDown) {
+      miloWatchdog.isDown = false;
+      miloWatchdog.consecutiveFailures = 0;
+      logEvent('MILO_RECOVERED', { wallMs: Date.now() - t });
+      await alertAdmin('Milo-api recovered — Don monitor is back online.');
+    }
+    miloWatchdog.consecutiveFailures = 0;
+    return;
+  }
+  miloWatchdog.consecutiveFailures++;
+  logEvent('MILO_FAILED', {
+    consec: miloWatchdog.consecutiveFailures,
+    detail: detail.slice(0, 200),
+  });
+  const justCrossed =
+    !miloWatchdog.isDown && miloWatchdog.consecutiveFailures >= MILO_WATCHDOG_FAIL_THRESHOLD;
+  const cooldownElapsed =
+    miloWatchdog.isDown && Date.now() - miloWatchdog.lastAlertAt > MILO_WATCHDOG_ALERT_COOLDOWN_MS;
+  if (justCrossed || cooldownElapsed) {
+    if (justCrossed) miloWatchdog.isDown = true;
+    miloWatchdog.lastAlertAt = Date.now();
+    await alertAdmin(
+      `*Milo-api watchdog (Don): DOWN*\n\n`
+      + `URL: ${MILO_HEALTH_URL}\n`
+      + `Detail: ${detail}\n`
+      + `Consecutive failures: ${miloWatchdog.consecutiveFailures}\n\n`
+      + `Don-monitor (the primary alert path for Don outages) is offline. `
+      + `Don itself is still healthy if you got this message, but if Don *also* goes down `
+      + `between now and milo-api recovery, only the external uptime monitor will catch it. `
+      + `Open Railway dashboard, project feisty-vision, service milo-api, check logs.`,
+    );
+  }
+}, 5 * 60 * 1000);
+
 // ─── Core message handler ────────────────────────────────────────────────────
 async function handleMessage(chatId, userMessage, userName) {
+  const msgStartedAt = Date.now();
+  let toolCallCount = 0;
+  logEvent('MSG', {
+    chat: chatId,
+    channel: 'telegram',
+    user: userName,
+    len: userMessage.length,
+  });
   console.log(`[TELEGRAM] Message from ${userName} (${chatId}): ${userMessage.substring(0, 120)}`);
   await sendTypingAction(chatId);
 
@@ -2260,14 +2427,31 @@ async function handleMessage(chatId, userMessage, userName) {
       const toolResults = [];
       for (const block of response.content) {
         if (block.type === "tool_use") {
+          toolCallCount++;
+          const toolStartedAt = Date.now();
           console.log(`Calling tool: ${block.name}`, JSON.stringify(block.input).substring(0, 200));
           let result;
+          let toolOk = true;
           try {
-            result = await handleToolCall(block.name, block.input);
+            // 60s per-tool budget. Future-proofs the loop against any new
+            // tool (or any existing upstream hanging without its own
+            // AbortSignal). Same defence Sam shipped in 02e4628.
+            result = await withTimeout(
+              handleToolCall(block.name, block.input),
+              60_000,
+              `tool '${block.name}'`,
+            );
           } catch (toolErr) {
+            toolOk = false;
             console.error(`Tool ${block.name} crashed: ${toolErr.message}`);
             result = `Tool ${block.name} failed: ${toolErr.message}`;
           }
+          logEvent('TOOL', {
+            chat: chatId,
+            tool: block.name,
+            wallMs: Date.now() - toolStartedAt,
+            ok: toolOk,
+          });
           toolResults.push({
             type: "tool_result",
             tool_use_id: block.id,
@@ -2318,12 +2502,28 @@ async function handleMessage(chatId, userMessage, userName) {
     addToConversationHistory(chatId, "assistant", reply);
 
     await sendTelegram(chatId, reply);
+    logEvent('REPLY', {
+      chat: chatId,
+      channel: 'telegram',
+      wallMs: Date.now() - msgStartedAt,
+      tools: toolCallCount,
+      len: reply.length,
+      ok: true,
+    });
 
     // Async memory extraction — fire and forget, never blocks the reply
     extractAndUpdateMemory(userMessage, reply).catch((err) =>
       console.error("[MEMORY] Background extraction error:", err.message)
     );
   } catch (err) {
+    logEvent('REPLY', {
+      chat: chatId,
+      channel: 'telegram',
+      wallMs: Date.now() - msgStartedAt,
+      tools: toolCallCount,
+      ok: false,
+      error: String(err?.message || err).slice(0, 200),
+    });
     console.error(`[ERROR] handleMessage ${chatId}:`, err?.status || err?.code || "", err?.message || err);
     let errorMsg;
     if (err?.status === 429) {
@@ -2346,6 +2546,63 @@ async function handleMessage(chatId, userMessage, userName) {
   }
 }
 
+// ─── Upstream health pings (used by /healthz/deep) ────────────────────────────
+// Each ping independently timeout-bounded; runs in parallel from
+// /healthz/deep so one slow upstream cannot block detection of another.
+
+async function pingClaude() {
+  const t = Date.now();
+  try {
+    const r = await anthropic.messages.create({
+      model: CLAUDE_MODEL,
+      max_tokens: 10,
+      messages: [{ role: 'user', content: 'pong' }],
+    });
+    return { ok: true, wallMs: Date.now() - t, model: r.model };
+  } catch (err) {
+    return { ok: false, wallMs: Date.now() - t, error: String(err.message || err).slice(0, 200) };
+  }
+}
+
+async function pingMsGraph() {
+  const t = Date.now();
+  try {
+    const token = await msGraphAuth();
+    return { ok: !!token, wallMs: Date.now() - t };
+  } catch (err) {
+    return { ok: false, wallMs: Date.now() - t, error: String(err.message || err).slice(0, 200) };
+  }
+}
+
+async function pingOdoo() {
+  const t = Date.now();
+  try {
+    const uid = await odooGetUid();
+    return { ok: !!uid, wallMs: Date.now() - t, uid };
+  } catch (err) {
+    return { ok: false, wallMs: Date.now() - t, error: String(err.message || err).slice(0, 200) };
+  }
+}
+
+async function pingTelegram() {
+  const t = Date.now();
+  try {
+    if (!TELEGRAM_TOKEN) {
+      return { ok: false, wallMs: Date.now() - t, error: 'TELEGRAM_TOKEN not set' };
+    }
+    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/getMe`, {
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      return { ok: false, wallMs: Date.now() - t, status: res.status, error: body.slice(0, 200) };
+    }
+    return { ok: true, wallMs: Date.now() - t };
+  } catch (err) {
+    return { ok: false, wallMs: Date.now() - t, error: String(err.message || err).slice(0, 200) };
+  }
+}
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.get("/", (_req, res) => {
   res.json({
@@ -2353,6 +2610,42 @@ app.get("/", (_req, res) => {
     bot: "Don (Mike Roberts' CoS) — Telegram",
     version: "1.0.0",
     uptime: process.uptime(),
+  });
+});
+
+app.get("/healthz/deep", async (req, res) => {
+  // Optional shared-secret guard. If HEALTH_TOKEN is unset, endpoint is open
+  // (acceptable on a private Railway URL; milo-api self-test should always
+  // pass the token so we can lock down later without breaking the cron).
+  const expected = process.env.HEALTH_TOKEN;
+  if (expected) {
+    const provided = req.get("x-health-token") || req.query.token;
+    if (provided !== expected) {
+      return res.status(401).json({ status: "unauthorised" });
+    }
+  }
+  const startedAt = Date.now();
+  const [claude, msGraph, odoo, telegram] = await Promise.all([
+    pingClaude(),
+    pingMsGraph(),
+    pingOdoo(),
+    pingTelegram(),
+  ]);
+  const components = { claude, msGraph, odoo, telegram };
+  const allOk = Object.values(components).every((c) => c.ok);
+  logEvent("HEALTHZ_DEEP", {
+    status: allOk ? "ok" : "degraded",
+    wallMs: Date.now() - startedAt,
+    claude: claude.ok ? "ok" : "FAIL",
+    msGraph: msGraph.ok ? "ok" : "FAIL",
+    odoo: odoo.ok ? "ok" : "FAIL",
+    telegram: telegram.ok ? "ok" : "FAIL",
+  });
+  res.status(allOk ? 200 : 503).json({
+    status: allOk ? "ok" : "degraded",
+    bot: "Don TRC",
+    wallMs: Date.now() - startedAt,
+    components,
   });
 });
 
@@ -2507,4 +2800,14 @@ app.listen(PORT, () => {
   console.log(`Telegram: ${TELEGRAM_TOKEN ? "configured" : "NOT SET"}`);
   console.log(`Allowed Telegram users: ${ALLOWED_USERS.length ? ALLOWED_USERS.join(", ") : "NONE — open to all (DANGEROUS)"}`);
   console.log(`Groq voice: ${process.env.GROQ_API_KEY ? "configured" : "NOT SET"}`);
+  // Structured boot event — operator can grep `[BOOT]` to count restarts per
+  // hour/day and spot crash loops in Railway log search. Frequent BOOT lines
+  // = trouble even if the every-5-min health monitor never alerted.
+  logEvent('BOOT', {
+    bootedAtIso: new Date().toISOString(),
+    port: PORT,
+    model: CLAUDE_MODEL,
+    adminAlertChats: ADMIN_TELEGRAM_CHAT_IDS.length,
+    miloWatchdogTarget: MILO_HEALTH_URL,
+  });
 });
