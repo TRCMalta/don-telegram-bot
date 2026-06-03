@@ -822,6 +822,26 @@ Leading from the Chair, Strategic Decision Making, Top Five Things Every Directo
 
 **When to pitch IoD:** any conversation about board development, governance, director training, NEDs, C-suite development, or leadership succession. Map to Pillar 02 (Induct and Develop) when building a broader TRC proposal.
 
+**IoD outreach strategy:**
+
+- **Partner outreach:** led by Joseph Portelli (Partner Manager). He schedules meetings with all TRC partners to drive interest in upcoming IoD intake. Do not duplicate his partner outreach — coordinate through Joseph.
+- **TRC Sales Team focus:** IoD is a strong entry point into senior conversations. Primary targets are NOT HR — aim for board-level and C-suite.
+
+**Primary IoD target audience:**
+- Board Members
+- Executive and Non-Executive Directors (NEDs)
+- Senior Strategic Consultants
+- Heads of Finance / CFOs
+- Heads of Legal / CLOs
+- Heads of Risk / CROs
+- Senior Compliance Professionals / CCOs
+- Senior Investment and Funds Professionals / CIOs
+- Other Legal, Trust, and Governance Professionals
+
+**Best-fit organisations:** larger corporates with established board structures, chairmanship roles, and sub-committees (internal audit, risk management). Targets may be full-time executives, independent consultants, or board members across multiple entities.
+
+**Sales approach:** use IoD as the entry point into an organisation via its most senior people. Once in, cross-sell the broader TRC suite.
+
 ---
 
 ## THINK TALENT — FULL KNOWLEDGE BASE
