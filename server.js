@@ -70,7 +70,7 @@ function logEvent(kind, fields = {}) {
 const PORT = process.env.PORT || 3000;
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-sonnet-4-20250514";
+const CLAUDE_MODEL = process.env.CLAUDE_MODEL || "claude-sonnet-4-6";
 
 // Odoo (Think Talent — reused from Sam)
 const ODOO_DB = process.env.ODOO_DB || "thinktalent_prod";
@@ -116,7 +116,7 @@ const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY, timeout: 60000 });
 // Uses /data (Railway volume) when mounted, falls back to /tmp (ephemeral)
 const MEMORY_DIR = existsSync("/data") ? "/data" : "/tmp";
 const MEMORY_FILE = path.join(MEMORY_DIR, "don-memory.json");
-const MEMORY_EXTRACTION_MODEL = "claude-haiku-4-20250514";
+const MEMORY_EXTRACTION_MODEL = process.env.MEMORY_EXTRACTION_MODEL || "claude-haiku-4-5";
 
 const DEFAULT_MEMORY = {
   version: 2,
