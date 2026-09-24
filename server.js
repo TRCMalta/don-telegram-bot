@@ -273,9 +273,24 @@ function getMaltaGreetingHint() {
 }
 
 // ─── Don's System Prompt ──────────────────────────────────────────────────────
+// Prompt caching: Don's ~18K-token static prompt is the cached prefix. The
+// clock and Don's memory change per message, so they ride in a trailing block
+// after the cache breakpoint. Keep DON_STATIC_PROMPT free of interpolation.
 function buildSystemPrompt(memory = null) {
   const memoryBlock = memory ? buildMemoryContext(memory) : "";
-  return `Today is ${getMaltaDate()}. Time in Malta: ${getMaltaTime()}.
+  return [
+    { type: "text", text: donStaticPrompt(), cache_control: { type: "ephemeral" } },
+    { type: "text", text: `## Current context\n\nToday is ${getMaltaDate()}. Time in Malta: ${getMaltaTime()}.${memoryBlock}` },
+  ];
+}
+
+function logCacheUsage(label, usage) {
+  if (!usage) return;
+  console.log(`[CACHE] ${label} read=${usage.cache_read_input_tokens || 0} write=${usage.cache_creation_input_tokens || 0} uncached_in=${usage.input_tokens || 0}`);
+}
+
+function donStaticPrompt() {
+  return `The current date and time in Malta, and Don's memory of Mike, are given at the end of these instructions.
 
 You are Don, Mike Roberts' AI Chief of Staff. Mike is CEO of The Remarkable Collective (TRC).
 
@@ -343,7 +358,7 @@ You sound like a sharp, switched-on British colleague texting Mike. Not a corpor
 - No long paragraphs. If it's more than three lines on a phone, break it up.
 - No em-dashes or en-dashes. Use commas and full stops instead. Hyphens in compound words are fine.
 - Never apologise for being an AI. Never say "as an AI" or "I should mention".
-- NEVER say: Certainly, Absolutely, Of course, Great question, I'd be happy to, No problem, Just to let you know, As mentioned, Please don't hesitate, Hope this helps, leverage, synergies, holistic, game-changer, dive into, unlock, empower, robust, seamless, cutting-edge.${memoryBlock}
+- NEVER say: Certainly, Absolutely, Of course, Great question, I'd be happy to, No problem, Just to let you know, As mentioned, Please don't hesitate, Hope this helps, leverage, synergies, holistic, game-changer, dive into, unlock, empower, robust, seamless, cutting-edge.
 
 ---
 
@@ -2430,13 +2445,17 @@ async function handleMessage(chatId, userMessage, userName) {
     const messages = [...previousMessages, { role: "user", content: userMessage }];
     console.log(`[MEMORY] ${chatId}: ${previousMessages.length} prior entries + new`);
 
+    // Built once per message so the clock cannot tick mid-loop and break the cache.
+    const system = buildSystemPrompt(memory);
     let response = await anthropic.messages.create({
       model: CLAUDE_MODEL,
       max_tokens: 4096,
-      system: buildSystemPrompt(memory),
+      cache_control: { type: "ephemeral" },  // automatic: caches the conversation tail
+      system,
       tools: DON_TOOLS,
       messages,
     });
+    logCacheUsage("turn", response.usage);
 
     let iterations = 0;
     while (response.stop_reason === "tool_use" && iterations < 10) {
@@ -2486,10 +2505,12 @@ async function handleMessage(chatId, userMessage, userName) {
       response = await anthropic.messages.create({
         model: CLAUDE_MODEL,
         max_tokens: 4096,
-        system: buildSystemPrompt(memory),
+        cache_control: { type: "ephemeral" },
+        system,
         tools: DON_TOOLS,
         messages,
       });
+      logCacheUsage(`tool-iter-${iterations}`, response.usage);
     }
 
     if (response.stop_reason === "tool_use" && iterations >= 10) {
@@ -2507,7 +2528,8 @@ async function handleMessage(chatId, userMessage, userName) {
       response = await anthropic.messages.create({
         model: CLAUDE_MODEL,
         max_tokens: 4096,
-        system: buildSystemPrompt(memory),
+        cache_control: { type: "ephemeral" },
+        system,
         messages,
       });
     }
